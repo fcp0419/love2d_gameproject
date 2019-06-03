@@ -42,6 +42,7 @@ function Stack:push(x)
 end
 
 function Stack:pop()
+	-- I am severely questioning whether I implemented a stack or a queue here
 	if self[self.pointer] then
 		local p = self[self.pointer]
 		self.pointer = self.pointer + 1

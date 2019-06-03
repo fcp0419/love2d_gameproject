@@ -1,6 +1,11 @@
 
 InputTable = Object:new{depth = 100}
 
+function InputTable:recordInputs()	
+	InputTable:cycleInputs()
+	InputTable:parseSystemInputs()
+end
+
 function InputTable.getReverse()
 	rt = {}
 	for i = 0, love.joystick.getJoystickCount() do
