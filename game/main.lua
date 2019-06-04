@@ -43,6 +43,10 @@ function sgn(x)
 	return 0
 end
 
+function append(tab, item)
+	tab[#tab+1] = item
+send
+
 function map(func, tab)	-- map a function onto all elements of a table.
 	-- !! WARNING - this WILL produce unexpected results when applied to tables with metamethods, such as objects. Every element of a table does include its functions, in the case of an object.
 	local newtab = {}
@@ -197,7 +201,7 @@ function LoadManager.initInputThread()
 	}
 	
 	InputChannel = love.thread.getChannel("Input")
-	ButtonConfigChannel = love.thread.getChannel("ButtonConfig")
+	InputRequestChannel = love.thread.getChannel("InputRequest")
 	
 	InputHandlingThread:start(configTable)
 

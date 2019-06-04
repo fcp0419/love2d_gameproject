@@ -51,6 +51,54 @@ function Stack:pop()
 	return nil
 end
 
+
+LinkedList = Object:new{max_size = false, size = 0, head = false, tail = false, data = {}, insertion_index = 1}
+
+function LinkedList:append(obj)
+	local i = insertion_index
+	local node = {content = obj, index = i}
+	if self:getHead() then
+		
+	else
+		node = 
+		self.head = node
+	end
+	
+	self.data[i] = node
+	self.size = self.size + 1
+	self.insertion_index = self.insertion_index + 1
+	if size > maxSize then 
+		self.insertion_index = 
+	end
+end
+
+function LinkedList:getHead()
+	return self.head or false
+end
+
+function LinkedList:getTail()
+	return self.tail or false
+end
+
+function LinkedList:getFirstN(n)
+	local contents = {}
+	local node = self:getHead()
+	for do
+		if node then
+			append(contents, node.data)
+			node = node.next
+		end
+	end
+	
+end
+
+function LinkedList:pruneLast()
+	local last = self.tail
+	
+
+end
+
+
 Set = {}
 
 Set.mt = {

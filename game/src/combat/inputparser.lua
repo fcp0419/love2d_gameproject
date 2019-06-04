@@ -1,10 +1,34 @@
-
 InputTable = Object:new{depth = 100}
 
 function InputTable:recordInputs()	
 	InputTable:cycleInputs()
 	InputTable:parseSystemInputs()
 end
+
+
+CombatInputHandler = {
+	compiledInputTable = {},
+	depth = 3600,
+	
+}
+
+
+
+function CombatInputHandler:recordInputs()
+	-- Get the compiled inputs from the 
+
+	local messages = {}
+
+	
+	InputRequestChannel:push(true)				-- request compiled inputs from the input handling channel
+	compiledInputs = InputChannel:demand()		-- wait for the input handling channel to supply the inputs
+	
+
+
+end
+
+
+
 
 function InputTable.getReverse()
 	rt = {}
