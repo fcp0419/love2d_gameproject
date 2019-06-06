@@ -53,22 +53,41 @@ end
 
 
 LinkedList = Object:new{max_size = false, size = 0, head = false, tail = false, data = {}, insertion_index = 1}
+-- We refer to the head as the first node - which is the last node inserted - where the linked list "starts".
+-- Symmetrically, the tail is the last node == the first, oldest node inserted.
+-- Technically, the list is double linked.
 
 function LinkedList:append(obj)
-	local i = insertion_index
-	local node = {content = obj, index = i}
+	local i = self.insertion_index
+	local node = {content = obj, index = i, prev = nil, next = nil}
 	if self:getHead() then
-		
+		local head_node = self:getHead()
+		head_node.prev = node
+		node.next = head_node
 	else
-		node = 
 		self.head = node
 	end
 	
+	if self.data[i] and self.maxSize then
+		self:pruneNode(i)
+	end
+	
 	self.data[i] = node
+	
+	-- 
 	self.size = self.size + 1
 	self.insertion_index = self.insertion_index + 1
+	
+	if maxSize and maxSize > 1 then
+		self.insertion_index = ((self.insertion_index - 1) % self.maxSize) + 1
+	end
+	
+	
 	if size > maxSize then 
-		self.insertion_index = 
+	
+		size = size - 1
+	
+	else
 	end
 end
 
@@ -92,10 +111,13 @@ function LinkedList:getFirstN(n)
 	
 end
 
-function LinkedList:pruneLast()
-	local last = self.tail
+function LinkedList:pruneNode(index)
+	assert(self.data[index].next == nil) -- this function should never be used to prune the node that isn't the head
+	assert(index == self.head.index)
 	
-
+	self.data[index].previous.next = nil
+	self.data[index] = nil
+	-- this should remove all references to node 
 end
 
 

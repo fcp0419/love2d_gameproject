@@ -24,13 +24,14 @@ initial_time, elapsed_time, sleep_time = 0, 0, 0
 
 
 function newCompiledInput()
-	local cpi = {}
-	for input_code, _ in pairs(Player.config.controls) do
-		cpi[input_code] = {}
-	end
-	cpi.direction = {}
+	local cpi = {_baseline = {}}
 	
-	return compiledInputs
+	for input_code, _ in pairs(Player.config.controls) do
+		cpi._baseline.input_code = Player:down(input_code)
+	end
+	cpi._baseline.direction = getDirection()
+	
+	return cpi
 end
 
 function hasDirectionChanged()
@@ -52,18 +53,29 @@ end
 
 function appendInputs(compiledInput)
 	compiledInput = compiledInput or newCompiledInput()
-
+	
+	currentFrameInput = {}
+	local nonempty = false
+	
 	for input_code, _ in pairs(Player.config.controls) do
 		if Player:pressed(input_code) then
-			table.insert(compiledInput[input_code], 1)
-		end
-		if Player:released(input_code) then
-			table.insert(compiledInput[input_code], -1)
+			currentFrameInput[input_code] = 1
+			nonempty = true
+		elseif Player:released(input_code) then	
+			-- security elif, but by the design of Baton these two events theoretically can't happen at the same time
+			currentFrameInput[input_code] = -1
+			nonempty = true
 		end
 	end
 	
 	if hasDirectionChanged() then
+		currentFrameInput[direction]
 		table.insert(compiledInput[direction], getDirection())
+		nonempty = true
+	end
+
+	if nonempty then
+		append(compiledInput, currentFrameInput)
 	end
 	
 	return compiledInput

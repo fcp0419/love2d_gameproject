@@ -9,7 +9,6 @@ end
 CombatInputHandler = {
 	compiledInputTable = {},
 	depth = 3600,
-	
 }
 
 

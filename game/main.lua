@@ -197,7 +197,7 @@ function LoadManager.initInputThread()
 			enhance = {'key:v', 'axis:triggerleft', 'axis:triggerright'},
 		},
 		
-		joystick = Joystick.getJoysticks()[activeJoystick],
+		joystick = Joystick.getJoysticks()[1],
 	}
 	
 	InputChannel = love.thread.getChannel("Input")
