@@ -38,13 +38,16 @@ function InputTable:match(pattern, depth)
 		if self[j] ~= nil and pattern(self[j]) then
 			return true
 		end
-		if self[j] ~= nil and self[j].hitstop then offset = offset + 1 i = i - 1 end
+		if self[j] ~= nil and self[j].hitstop then
+			offset = offset + 1 
+			i = i - 1 
+		end
 	end
 	return false
 end
 
 
-InputTable.controller = 1
+InputTable.controller = 0
 
 function InputTable.newInput()
 	return {up = false, down = false, left = false, right = false, light = false, heavy = false, jump = false, dash = false, start = false, option = false, sway = false, turn = false, hitstop = false, lt = -1, rt = -1}
